@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import web.comments.model.Comment;
+import web.model.Comment;
 import web.model.User;
 
 import java.util.Collection;

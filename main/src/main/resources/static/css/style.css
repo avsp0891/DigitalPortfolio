@@ -8,6 +8,25 @@
     text-decoration: none
 }
 
+.images-wrap {
+    width: 600px;
+    height: 300px;
+    border: 1px solid gray;
+}
+.image-center{
+    display: block;
+    margin: auto;
+}
+
+.image-align{
+    text-align: center;
+}
+
+.image-flex{
+    display: flex;
+    align-items: center;
+}
+
 
 
 

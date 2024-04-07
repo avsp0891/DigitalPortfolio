@@ -1,41 +1,71 @@
-<#macro template user>
+<#macro template user url>
     <!doctype html>
     <html lang="ru">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="/static/css/style.css">
+<#--        <link rel="stylesheet" href="/static/css/style.css">-->
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
               integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
               crossorigin="anonymous">
 
-        <title>КОТОГРАМ</title>
+        <title>Kotogram</title>
     </head>
     <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a href="/">
-                <span class="navbar-brand mb-0 h1">КОТОГРАМ</span>
-            </a>
-            <#if user.email??>
-                <div class="dropdown text-end">
-                    <a href="/profile">
-                        <img src="/static/images/avatar.png" alt="mdo"
-                             width="32" height="32" class="rounded-circle">
-                    </a>
-                </div>
-            <#else>
-                <button class="btn btn-light my-2 my-sm-0" type="button"
-                        onclick="window.location.href = '/login'">
-                    Войти
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar fixed-top bg-light">
+                <a class="navbar-brand" href="/">Kotogram</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-            </#if>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <#if user.email??>
+                        <#if url != '/profile'>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success" type="button"
+                                        onclick="window.location.href = '/profile'">
+                                    Личный кабинет
+                                </button>
+                            </li>
+                        </#if>
+                        <li class="nav-item">
+                            <form action="/logout" method="post">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                <button class="btn btn-outline-success" type="submit">
+                                    Выйти
+                                </button>
+                            </form>
+                        </li>
+                        <#else>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-success" type="button"
+                                    onclick="window.location.href = '/login'">
+                                Войти
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-success" type="button"
+                                    onclick="window.location.href = '/registration'">
+                                Регистрация
+                            </button>
+                        </li>
+                    </ul>
+                    </#if>
+                </div>
+            </nav>
         </div>
-    </nav>
-    <div class="container mt-4">
+    </header>
+
+    <div class="container images-wrap image-flex">
         <#nested/>
     </div>
 

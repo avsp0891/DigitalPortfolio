@@ -27,6 +27,7 @@ public class ItemController {
     public String items(Model model, Principal principal) {
         model.addAttribute("items", itemService.findAll());
         model.addAttribute("user", itemService.getUserByPrincipal(principal));
+        model.addAttribute("url", "/");
         return "items";
     }
 
@@ -36,6 +37,7 @@ public class ItemController {
         model.addAttribute("item", item);
         model.addAttribute("author", item.getUser());
         model.addAttribute("user", itemService.getUserByPrincipal(principal));
+        model.addAttribute("url", "items/" + id);
         return "items-info";
     }
 

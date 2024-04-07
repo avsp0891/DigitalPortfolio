@@ -3,7 +3,7 @@ package old.comments.service;
 
 
 import web.comments.dto.CommentDto;
-import web.comments.model.Comment;
+import web.model.Comment;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import web.comments.dto.CommentDto;
-import web.comments.service.CommentService;
+import web.service.CommentService;
 
 import java.util.List;
 

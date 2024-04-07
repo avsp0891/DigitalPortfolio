@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import web.comments.dto.CommentDto;
 import web.comments.dto.CommentMapper;
-import web.comments.model.Comment;
-import web.comments.repository.CommentRepository;
-import web.comments.service.CommentService;
-import web.service.UserService;
+import web.model.Comment;
+import web.repository.CommentRepository;
+import web.service.CommentService;
 
 import java.sql.Timestamp;
 import java.util.List;

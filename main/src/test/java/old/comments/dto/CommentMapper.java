@@ -3,7 +3,7 @@ package old.comments.dto;
 
 
 import web.comments.dto.CommentDto;
-import web.comments.model.Comment;
+import web.model.Comment;
 
 import java.util.List;
 import java.util.stream.Collectors;

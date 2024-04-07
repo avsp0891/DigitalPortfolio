@@ -1,4 +1,4 @@
-package web.comments.model;
+package web.model;
 
 
 import lombok.AllArgsConstructor;

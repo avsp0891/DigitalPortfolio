@@ -1,10 +1,9 @@
-package web.comments.model;
+package web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import web.model.User;
 
 import javax.persistence.*;
 
@@ -13,7 +12,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 //@Entity
-public class Likes {
+public class Dislikes {
+
     @Id
     @Basic
     @Column(name = "owner_id", nullable = false)

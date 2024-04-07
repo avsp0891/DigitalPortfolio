@@ -2,12 +2,19 @@ package web.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
+import java.security.Principal;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -18,12 +25,16 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("url", "/login");
         return "login";
     }
 
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("url", "/registration");
         return "registration";
     }
 
@@ -36,43 +47,12 @@ public class UserController {
         return "redirect:/login";
     }
 
-//    @GetMapping("/hello")
-//    public String securityUrl(){
-//        return "hello";
-//    }
-
-
-//    @GetMapping
-//    @ResponseStatus(OK)
-//    public List<UserDto> findAll() {
-//        log.info("Вернуть список всех пользователей.");
-//        return userService.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    @ResponseStatus(OK)
-//    public UserDto findById(@PathVariable(value = "id") Integer id) {
-//        log.info("Найти пользователя {}.", id);
-//        return userService.findById(id);
-//    }
-//
-//    @PostMapping
-//    @ResponseStatus(CREATED)
-//    public UserDto add(@RequestBody UserDto userDto) {
-//        log.info("Создание пользователя {}.", userDto.getName());
-//        return userService.add(userDto);
-//    }
-//
-//    @PatchMapping("/{id}")
-//    public UserDto change(@PathVariable(value = "id") Integer id, @RequestBody UserDto userDto) {
-//        log.info("Изменение пользователя {}.", userDto.getId());
-//        return userService.change(id, userDto);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public UserDto deleteById(@PathVariable(value = "id") Integer id) {
-//        log.info("Удаление пользователя {}.", id);
-//        return userService.deleteById(id);
-//    }
+    @GetMapping("/profile")
+    public String profile(Principal principal, Model model) {
+        User user = userService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        model.addAttribute("url", "/profile");
+        return "profile";
+    }
 
 }

@@ -1,0 +1,14 @@
+.product:hover {
+    transition: 0.5s;
+    transform: scale(1.02);
+}
+
+.product-link {
+    color: #1bde0c !important;
+    text-decoration: none
+}
+
+
+
+
+

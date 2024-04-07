@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+
+  server:
+    build: main
+    image: main
+    container_name: main_container
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/dp
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+
+  db:
+    hostname: db
+    image: postgres:13.7-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=dp
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+
+#  db1:
+#    image: mysql:5.7
+#    volumes:
+#      - ./data:/var/lib/mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: password
+#      MYSQL_DATABASE: buysell
+#      MYSQL_USER: buysell
+#      MYSQL_PASSWORD: password
+#    ports:
+#      - "3306:3306"
+
+  #  mongo:
+  #    image: mongo
+  #    container_name: mongoDb
+  #    restart: always
+  #    ports:
+  #    - "27017:27017"
+  #    environment:
+  #      MONGO_INITDB_DATABASE: test
+  #      MONGO_INITDB_ROOT_USERNAME: admin
+  #      MONGO_INITDB_ROOT_PASSWORD: password
+  #    volumes:
+  #    - ./data:/data/db

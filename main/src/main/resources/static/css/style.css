@@ -1,0 +1,33 @@
+.product:hover {
+    transition: 0.5s;
+    transform: scale(1.02);
+}
+
+.product-link {
+    color: #1bde0c !important;
+    text-decoration: none
+}
+
+.images-wrap {
+    width: 600px;
+    height: 300px;
+    border: 1px solid gray;
+}
+.image-center{
+    display: block;
+    margin: auto;
+}
+
+.image-align{
+    text-align: center;
+}
+
+.image-flex{
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+

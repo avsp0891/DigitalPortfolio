@@ -22,8 +22,6 @@ public class Item {
     private String name;
     @Column(name = "description")
     private String description;
-//    @Column(name = "owner_id")
-//    private Integer ownerId;
     @Column(name = "originalFileName")
     private String originalFileName;
     @Column(name = "size")

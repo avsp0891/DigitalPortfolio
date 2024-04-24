@@ -18,7 +18,7 @@
         <#list items as item>
             <hr>
             <div>
-                <img src="/images/${item.id}" height="600px" class="mx-auto d-block">
+                <img src="/images/${item.id}" height="200px" class="mx-auto d-block">
             </div>
             <div class="row super">
                 <div class="mt-3 mx-auto d-block">

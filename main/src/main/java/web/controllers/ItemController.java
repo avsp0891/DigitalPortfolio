@@ -31,7 +31,6 @@ public class ItemController {
 
     private final ItemService itemService;
     private final CommentsService commentsService;
-    private final UserService userService;
 
 
     @GetMapping("/")
@@ -74,7 +73,7 @@ public class ItemController {
         return "redirect:/";
     }
 
-    public static void sortCommentsByDateDescending(List<Comment> comments) {
+    private static void sortCommentsByDateDescending(List<Comment> comments) {
         comments.sort((c1, c2) -> c2.getDateOfCreated().compareTo(c1.getDateOfCreated()));
     }
 }

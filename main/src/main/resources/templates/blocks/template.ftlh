@@ -29,6 +29,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <#if user.email??>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addPhoto">
+                                Добавить фото
+                            </button>
+                        </li>
+
                         <#if url != '/profile'>
                             <li class="nav-item">
                                 <button class="btn btn-outline-success" type="button"
@@ -74,6 +80,29 @@
     </header>
 
     <div class="container">
+        <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/items/create" method="post" enctype="multipart/form-data">
+                            Фотография: <input type="file" name="image"><br><br>
+                            Описание: <input type="text" name="description"><br><br>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <button type="submit" class="btn btn-primary">Подтвердить</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
         <#nested/>
     </div>
 

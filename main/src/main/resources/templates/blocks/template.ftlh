@@ -37,7 +37,15 @@
                                 </button>
                             </li>
                         </#if>
-                        <li class="nav-item">
+                        <#if user.isAdmin()>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success" type="button"
+                                        onclick="window.location.href = '/admin'">
+                                    Панель администратора
+                                </button>
+                            </li>
+                        </#if>
+                        <li class="nav-item col-md-4">
                             <form action="/logout" method="post">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button class="btn btn-outline-success" type="submit">
@@ -52,7 +60,7 @@
                                 Войти
                             </button>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item col-md-4">
                             <button class="btn btn-outline-success" type="button"
                                     onclick="window.location.href = '/registration'">
                                 Регистрация
@@ -65,7 +73,7 @@
         </div>
     </header>
 
-    <div class="container images-wrap image-flex">
+    <div class="container">
         <#nested/>
     </div>
 

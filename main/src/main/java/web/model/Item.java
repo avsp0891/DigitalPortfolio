@@ -6,6 +6,7 @@ import web.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -34,6 +35,10 @@ public class Item {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn
     private User user;
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn
+    private List<Comment> comments;
     private LocalDateTime dateOfCreated;
     @PrePersist
     private void init(){

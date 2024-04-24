@@ -24,9 +24,6 @@ public class ItemService {
         return repository.findAll();
     }
 
-//    public List<Item> findByOwnerId(Integer ownerId) {
-//        return repository.findByOwnerId(ownerId);
-//    }
 
     public Item findById(Integer id) {
         return repository.findById(id).orElse(null);

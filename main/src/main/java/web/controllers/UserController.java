@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
+import web.service.ItemService;
 import web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
+    private final ItemService itemService;
 
 
     @GetMapping("/login")
@@ -53,6 +55,14 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("url", "/profile");
         return "profile";
+    }
+    @GetMapping("/user/{user}")
+    public String userInfo(@PathVariable("user") User user, Model model, Principal principal){
+        model.addAttribute("user", user);
+        model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
+        model.addAttribute("items", user.getItems());
+        model.addAttribute("url", "/user/");
+        return "user-info";
     }
 
 }

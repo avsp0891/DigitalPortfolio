@@ -28,9 +28,9 @@
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <div class="form-group">
-            <button class="btn btn-outline-success" type="submit">
-                Оставить комментарий
-            </button>
+                <button class="btn btn-outline-success" type="submit">
+                    Оставить комментарий
+                </button>
             </div>
         </form>
     </#if>

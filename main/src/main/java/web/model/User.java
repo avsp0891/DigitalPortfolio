@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Comment> comments = new ArrayList<>();
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return roles.contains(Role.ROLE_ADMIN);
     }
 

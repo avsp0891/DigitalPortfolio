@@ -9,11 +9,7 @@ import web.model.User;
 import web.repository.UserRepository;
 
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,11 +39,11 @@ public class UserService {
         return repository.findByEmail(principal.getName());
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return repository.findAll();
     }
 
-    public void banUser(Integer id){
+    public void banUser(Integer id) {
         User user = repository.findById(id).orElse(null);
         if (user != null) {
             if (user.isActive()) {

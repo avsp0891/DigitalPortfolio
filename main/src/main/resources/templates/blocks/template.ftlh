@@ -5,7 +5,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<#--        <link rel="stylesheet" href="/static/css/style.css">-->
+        <#--        <link rel="stylesheet" href="/static/css/style.css">-->
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -30,7 +30,8 @@
                     <ul class="navbar-nav ml-auto">
                         <#if user.email??>
                         <li class="nav-item">
-                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addPhoto">
+                            <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                                    data-target="#addPhoto">
                                 Добавить фото
                             </button>
                         </li>
@@ -80,7 +81,8 @@
     </header>
 
     <div class="container">
-        <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

@@ -2,7 +2,6 @@ package web.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import web.model.Comment;
 import web.model.Item;
-import web.model.User;
-import web.repository.UserRepository;
 import web.service.CommentsService;
 import web.service.ItemService;
-import web.service.UserService;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -61,7 +54,7 @@ public class ItemController {
     }
 
     @PostMapping("/items/{itemId}/comments/create")
-    private String addComment(@PathVariable Integer itemId, Comment comment, Model model, Principal principal){
+    private String addComment(@PathVariable Integer itemId, Comment comment, Model model, Principal principal) {
         Item item = itemService.findById(itemId);
         commentsService.add(principal, comment, item);
         return itemsInfo(itemId, model, principal);

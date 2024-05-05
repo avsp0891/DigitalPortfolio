@@ -18,7 +18,7 @@ public class ImageController {
     private final ItemRepository itemRepository;
 
     @GetMapping("/images/{id}")
-    private ResponseEntity<?> getImageById(@PathVariable Integer id){
+    private ResponseEntity<?> getImageById(@PathVariable Integer id) {
         Item item = itemRepository.findById(id).orElse(null);
         return ResponseEntity.ok()
                 .header("fileName", item.getOriginalFileName())

@@ -8,13 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import web.model.Role;
 import web.model.User;
 import web.service.UserService;
 
 import java.security.Principal;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,10 +25,10 @@ public class AdminController {
         User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
         model.addAttribute("url", "/admin");
-        if (user.isAdmin()){
+        if (user.isAdmin()) {
             return "admin";
         } else {
-           return  "redirect:/";
+            return "redirect:/";
         }
 
     }

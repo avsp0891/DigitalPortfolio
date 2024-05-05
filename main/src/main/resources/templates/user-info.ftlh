@@ -15,20 +15,20 @@
     <hr>
     <h1 style="text-align: center">Изображения пользователя ${user.name}</h1>
     <br>
-        <#list items as item>
-            <hr>
-            <div>
-                <img src="/images/${item.id}" height="200px" class="mx-auto d-block">
+    <#list items as item>
+        <hr>
+        <div>
+            <img src="/images/${item.id}" height="200px" class="mx-auto d-block">
+        </div>
+        <div class="row super">
+            <div class="mt-3 mx-auto d-block">
+                <button class="btn btn-outline-success " type="button"
+                        onclick="window.location.href = '/items/${item.id}'">
+                    Подробнее
+                </button>
             </div>
-            <div class="row super">
-                <div class="mt-3 mx-auto d-block">
-                    <button class="btn btn-outline-success " type="button"
-                            onclick="window.location.href = '/items/${item.id}'">
-                        Подробнее
-                    </button>
-                </div>
-            </div>
-        <#else>
-            <h1 style="text-align: center">Не найдено</h1>
-        </#list>
+        </div>
+    <#else>
+        <h1 style="text-align: center">Не найдено</h1>
+    </#list>
 </@t.template>

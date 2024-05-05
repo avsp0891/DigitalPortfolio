@@ -16,12 +16,12 @@
         <br>
         <br>
         <#if user.getEmail()??>
-<#--            <form action="/items/create" method="post" enctype="multipart/form-data">-->
-<#--                Фотка: <input type="file" name="image"><br><br>-->
-<#--                Описание: <input type="text" name="description"><br><br>-->
-<#--                <input type="hidden" name="_csrf" value="${_csrf.token}">-->
-<#--                <input type="submit" value="Добавить фото"/>-->
-<#--            </form>-->
+        <#--            <form action="/items/create" method="post" enctype="multipart/form-data">-->
+        <#--                Фотка: <input type="file" name="image"><br><br>-->
+        <#--                Описание: <input type="text" name="description"><br><br>-->
+        <#--                <input type="hidden" name="_csrf" value="${_csrf.token}">-->
+        <#--                <input type="submit" value="Добавить фото"/>-->
+        <#--            </form>-->
         </#if>
         <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
            href="/user/${user.id}">

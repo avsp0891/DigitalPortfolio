@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.model.Comment;
 
 import java.util.List;
+
 @Transactional
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 

@@ -2,7 +2,6 @@ package web.model;
 
 
 import lombok.Data;
-import web.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,8 +37,9 @@ public class Item {
     @JoinColumn
     private List<Comment> comments;
     private LocalDateTime dateOfCreated;
+
     @PrePersist
-    private void init(){
+    private void init() {
         dateOfCreated = LocalDateTime.now();
     }
 

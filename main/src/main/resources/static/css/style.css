@@ -8,24 +8,13 @@
     text-decoration: none
 }
 
-.images-wrap {
-    width: 600px;
-    height: 300px;
-    border: 1px solid gray;
-}
-.image-center{
-    display: block;
-    margin: auto;
-}
-
-.image-align{
+.super {
     text-align: center;
+    background-size: 4px;
+    color: #11cfcf;
+    background-color: aquamarine !important;
 }
 
-.image-flex{
-    display: flex;
-    align-items: center;
-}
 
 
 

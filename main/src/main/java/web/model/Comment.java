@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,23 +24,17 @@ public class Comment {
     @Column(name = "text", nullable = false, length = 4000)
     private String text;
 
-    @Column(name = "item_id", nullable = false)
-    private Integer itemId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Item item;
 
-    @Column(name = "author_id", nullable = false)
-    private Integer authorId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn
+    private User user;
+    private LocalDateTime dateOfCreated;
 
-    @Column(name = "created", nullable = false)
-    private Timestamp created;
-//    @ManyToOne
-//    @JoinColumn(name = "item_id", referencedColumnName = "id")
-//    private Items itemsByItemId;
-//    @ManyToOne
-//    @JoinColumn(name = "author_id", referencedColumnName = "id")
-//    private User usersByAuthorId;
-//    @OneToMany(mappedBy = "commentsByCommentId")
-//    private Collection<Dislikes> dislikesById;
-//    @OneToMany(mappedBy = "commentsByCommentId")
-//    private Collection<Likes> likesById;
+    @PrePersist
+    private void init() {
+        dateOfCreated = LocalDateTime.now();
+    }
 
 }

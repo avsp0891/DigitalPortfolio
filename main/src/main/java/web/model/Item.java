@@ -2,10 +2,10 @@ package web.model;
 
 
 import lombok.Data;
-import web.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -21,8 +21,6 @@ public class Item {
     private String name;
     @Column(name = "description")
     private String description;
-//    @Column(name = "owner_id")
-//    private Integer ownerId;
     @Column(name = "originalFileName")
     private String originalFileName;
     @Column(name = "size")
@@ -34,9 +32,14 @@ public class Item {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn
     private User user;
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn
+    private List<Comment> comments;
     private LocalDateTime dateOfCreated;
+
     @PrePersist
-    private void init(){
+    private void init() {
         dateOfCreated = LocalDateTime.now();
     }
 

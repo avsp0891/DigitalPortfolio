@@ -29,7 +29,7 @@
 
     <div class="mt-3 mx-auto d-block">
         <button class="btn btn-outline-success " type="button"
-                onclick="window.location.href = '/user/${item.user.id}'">
+                onclick="window.open('/user/${item.user.id}')">
             Посмотреть профиль пользователя
         </button>
     </div>

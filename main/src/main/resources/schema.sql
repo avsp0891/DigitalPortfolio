@@ -80,7 +80,14 @@ CREATE TABLE IF NOT EXISTS comments
 
 
 CREATE TABLE IF NOT EXISTS Likes
-(
+(id
+ BIGINT
+ GENERATED
+ BY
+ DEFAULT AS
+ IDENTITY
+ NOT
+ NULL,
     owner_id
     BIGINT
     NOT
@@ -106,6 +113,10 @@ CREATE TABLE IF NOT EXISTS Likes
 (
     item_id
 ) REFERENCES items
+(
+    id
+),
+    CONSTRAINT pk_likes PRIMARY KEY
 (
     id
 ));

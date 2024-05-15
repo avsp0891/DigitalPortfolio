@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import web.model.Comment;
 import web.model.Item;
+import web.model.User;
 import web.service.CommentsService;
 import web.service.ItemService;
+import web.service.LikesService;
+import web.service.UserService;
 
 import java.security.Principal;
 import java.util.List;
@@ -22,8 +25,13 @@ import java.util.List;
 @Controller
 public class ItemController {
 
+    private final UserService userService;
+
     private final ItemService itemService;
     private final CommentsService commentsService;
+    private final LikesService likesService;
+
+    private final UserController userController;
 
 
     @GetMapping("/")
@@ -60,9 +68,15 @@ public class ItemController {
         return itemsInfo(itemId, model, principal);
     }
 
-    @PostMapping("/items/delete/{id}")
-    public String deleteById(@PathVariable Integer id) {
-        itemService.deleteById(id);
+    @PostMapping("/items/delete/{itemId}")
+    public String deleteById(@PathVariable Integer itemId, Principal principal, Model model) {
+        itemService.deleteById(itemId, principal);
+        return userController.userInfo(userService.getUserByPrincipal(principal), model, principal);
+    }
+
+    @PostMapping("/items/{itemId}/likes/add")
+    public String addLike(@PathVariable Integer itemId, Principal principal) {
+        likesService.add(principal, itemService.findById(itemId));
         return "redirect:/";
     }
 

@@ -2,14 +2,20 @@ package web.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import web.model.Comment;
 import web.model.Item;
+import web.model.Likes;
 import web.model.User;
+import web.repository.CommentRepository;
 import web.repository.ItemRepository;
+import web.repository.LikesRepository;
 import web.repository.UserRepository;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +24,8 @@ public class ItemService {
 
     private final ItemRepository repository;
     private final UserRepository userRepository;
+    private final LikesRepository likesRepository;
+    private final CommentRepository commentRepository;
 
 
     public List<Item> findAll() {
@@ -49,9 +57,18 @@ public class ItemService {
         }
         return userRepository.findByEmail(principal.getName());
     }
-
-    public void deleteById(Integer id) {
-        repository.deleteById(id);
+    @Transactional
+    public void deleteById(Integer id, Principal principal) {
+        Item item = findById(id);
+        if (item.getUser().getId().equals(getUserByPrincipal(principal).getId())){
+            for (Likes l: likesRepository.findAllByItemId(item.getId())){
+                likesRepository.deleteById(l.getId());
+            }
+            for (Comment c: commentRepository.findAllByItemId(item.getId())){
+                commentRepository.deleteById(c.getId());
+            }
+            repository.delete(item);
+        }
     }
 
 

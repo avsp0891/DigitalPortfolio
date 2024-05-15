@@ -23,7 +23,7 @@
         <div class="row super">
             <div class="mt-3 mx-auto d-block">
                 <button class="btn btn-outline-success " type="button"
-                        onclick="window.location.href = '/items/${item.id}'">
+                        onclick="window.open('/items/${item.id}')">
                     Подробнее
                 </button>
             </div>

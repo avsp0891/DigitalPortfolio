@@ -1,3 +1,4 @@
+
 <#macro template user url>
     <!doctype html>
     <html lang="ru">
@@ -13,13 +14,14 @@
               crossorigin="anonymous">
 
         <title>Kotogram</title>
+        <link rel="icon" href="https://project.ai-info.ru/sites/default/files/oig3_1.jpg>
     </head>
     <body>
 
     <header>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar fixed-top bg-light">
-                <a class="navbar-brand" href="/">Kotogram</a>
+            <nav class="navbar navbar-expand-lg navbar-light navbar fixed-top" style="background-color: #DEF7E5;">
+                <a class="navbar-brand" href="/"><img src="https://project.ai-info.ru/sites/default/files/oig3_1.jpg" style="width:60px;height:60px;" class="rounded"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +32,7 @@
                     <ul class="navbar-nav ml-auto">
                         <#if user.email??>
                         <li class="nav-item">
-                            <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                            <button type="button" style="height:60px" class="btn btn-outline-success" data-toggle="modal"
                                     data-target="#addPhoto">
                                 Добавить фото
                             </button>
@@ -38,7 +40,7 @@
 
                         <#if url != '/profile'>
                             <li class="nav-item">
-                                <button class="btn btn-outline-success" type="button"
+                                <button class="btn btn-outline-success" type="button" style="height:60px"
                                         onclick="window.location.href = '/profile'">
                                     Личный кабинет
                                 </button>
@@ -46,7 +48,7 @@
                         </#if>
                         <#if user.isAdmin()>
                             <li class="nav-item">
-                                <button class="btn btn-outline-success" type="button"
+                                <button class="btn btn-outline-success" type="button" style="height:60px"
                                         onclick="window.location.href = '/admin'">
                                     Панель администратора
                                 </button>
@@ -55,20 +57,20 @@
                         <li class="nav-item col-md-4">
                             <form action="/logout" method="post">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                <button class="btn btn-outline-success" type="submit">
+                                <button class="btn btn-outline-success" type="submit" style="height:60px">
                                     Выйти
                                 </button>
                             </form>
                         </li>
                         <#else>
                         <li class="nav-item">
-                            <button class="btn btn-outline-success" type="button"
+                            <button class="btn btn-outline-success" type="button" style="height:60px"
                                     onclick="window.location.href = '/login'">
                                 Войти
                             </button>
                         </li>
                         <li class="nav-item col-md-4">
-                            <button class="btn btn-outline-success" type="button"
+                            <button class="btn btn-outline-success" type="button" style="height:60px"
                                     onclick="window.location.href = '/registration'">
                                 Регистрация
                             </button>
@@ -79,7 +81,7 @@
             </nav>
         </div>
     </header>
-
+    <div id="fix-for-navbar-fixed-top-spacing" style="height: 70px;">&nbsp;</div>
     <div class="container">
         <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">

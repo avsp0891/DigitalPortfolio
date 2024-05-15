@@ -12,6 +12,20 @@
     <h2>Описание ${item.description}</h2>
     <h2>Размер ${item.size}</h2>
     <h2>Пользователь ${item.user.getEmail()}</h2>
+    <p>Количество лайков: <span id="likeCount"></span></p>
+    <script>
+        const url = '/likes/${item.id}';
+        const likeCountElement = document.getElementById('likeCount');
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                likeCountElement.textContent = data.likes;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
 
     <div class="mt-3 mx-auto d-block">
         <button class="btn btn-outline-success " type="button"
@@ -32,6 +46,12 @@
                     Оставить комментарий
                 </button>
             </div>
+        </form>
+        <form action="/items/${item.id}/likes/add" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <button class="btn btn-outline-success" type="submit">
+                Поставить лайк
+            </button>
         </form>
     </#if>
 

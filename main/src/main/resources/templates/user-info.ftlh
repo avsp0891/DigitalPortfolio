@@ -28,6 +28,14 @@
                 </button>
             </div>
         </div>
+         <#if userByPrincipal.getId() == item.user.id>
+        <form action="/items/delete/${item.id}" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <button class="btn btn-outline-success" type="submit">
+                Удалить
+            </button>
+        </form>
+         </#if>
     <#else>
         <h1 style="text-align: center">Не найдено</h1>
     </#list>

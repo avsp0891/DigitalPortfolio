@@ -6,27 +6,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-//@Entity
+@Entity
 public class Likes {
-    @Id
-    @Basic
-    @Column(name = "owner_id", nullable = false)
-    private long ownerId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
     @Basic
-    @Column(name = "comment_id", nullable = false)
-    private long commentId;
-    @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
-    private User usersByOwnerId;
-    @ManyToOne
-    @JoinColumn(name = "comment_id", referencedColumnName = "id", nullable = false)
-    private Comment commentByCommentId;
+    @Column(name = "owner_id", nullable = false)
+    private Integer ownerId;
+    @Basic
+    @Column(name = "item_id", nullable = false)
+    private Integer itemId;
 
 }

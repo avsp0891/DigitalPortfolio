@@ -56,26 +56,26 @@ CREATE TABLE IF NOT EXISTS items
 )
     );
 
-CREATE TABLE IF NOT EXISTS comments
-(
-    id
-    BIGINT
-    GENERATED
-    BY
-    DEFAULT AS
-    IDENTITY
-    NOT
-    NULL,
-    text
-    VARCHAR
-(
-    4000
-) NOT NULL,
-    CONSTRAINT pk_comment PRIMARY KEY
-(
-    id
-)
-    );
+-- CREATE TABLE IF NOT EXISTS comments
+-- (
+--     id
+--     BIGINT
+--     GENERATED
+--     BY
+--     DEFAULT AS
+--     IDENTITY
+--     NOT
+--     NULL,
+--     text
+--     VARCHAR
+-- (
+--     4000
+-- ) NOT NULL,
+--     CONSTRAINT pk_comment PRIMARY KEY
+-- (
+--     id
+-- )
+--     );
 
 
 
@@ -120,37 +120,37 @@ CREATE TABLE IF NOT EXISTS Likes
 (
     id
 ));
-CREATE TABLE IF NOT EXISTS dislikes
-(
-    owner_id
-    BIGINT
-    NOT
-    NULL,
-    item_id
-    BIGINT
-    NOT
-    NULL,
-    CONSTRAINT
-    FK_ITEM_ON_OWNER
-    FOREIGN
-    KEY
-(
-    owner_id
-) REFERENCES users
-(
-    id
-),
-    CONSTRAINT
-    FK_ITEM_ON_COMMENT
-    FOREIGN
-    KEY
-(
-    item_id
-) REFERENCES items
-(
-    id
-)
-    );
+-- CREATE TABLE IF NOT EXISTS dislikes
+-- (
+--     owner_id
+--     BIGINT
+--     NOT
+--     NULL,
+--     item_id
+--     BIGINT
+--     NOT
+--     NULL,
+--     CONSTRAINT
+--     FK_ITEM_ON_OWNER
+--     FOREIGN
+--     KEY
+-- (
+--     owner_id
+-- ) REFERENCES users
+-- (
+--     id
+-- ),
+--     CONSTRAINT
+--     FK_ITEM_ON_COMMENT
+--     FOREIGN
+--     KEY
+-- (
+--     item_id
+-- ) REFERENCES items
+-- (
+--     id
+-- )
+--     );
 
 
 

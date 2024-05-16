@@ -16,6 +16,7 @@ import web.repository.UserRepository;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -29,7 +30,10 @@ public class ItemService {
 
 
     public List<Item> findAll() {
-        return repository.findAll();
+        List<Item> list = repository.findAll();
+        list.sort(DateOfCreatedComparator);
+//        return repository.findAll();
+        return list;
     }
 
 
@@ -70,6 +74,8 @@ public class ItemService {
             repository.delete(item);
         }
     }
+
+    public static Comparator<Item> DateOfCreatedComparator = (item1, item2) -> item2.getDateOfCreated().compareTo(item1.getDateOfCreated());
 
 
 }

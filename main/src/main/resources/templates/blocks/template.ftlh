@@ -1,4 +1,3 @@
-
 <#macro template user url>
     <!doctype html>
     <html lang="ru">
@@ -14,14 +13,18 @@
               crossorigin="anonymous">
 
         <title>Kotogram</title>
-        <link rel="icon" href="https://project.ai-info.ru/sites/default/files/oig3_1.jpg>
     </head>
-    <body>
+    <body style="background-color: #e2f6e8">
 
     <header>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light navbar fixed-top" style="background-color: #DEF7E5;">
-                <a class="navbar-brand" href="/"><img src="https://project.ai-info.ru/sites/default/files/oig3_1.jpg" style="width:60px;height:60px;" class="rounded"></a>
+            <nav class="navbar navbar-expand-lg navbar-light navbar fixed-top"
+                 style="background-color: white">
+                <a class="navbar-brand" href="/">
+                    <img src="/static/images/logo3.png" style="width:90px;height:90px; border:2px solid white"
+                         class="rounded"
+                         alt="Kotogram"></a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,14 +35,14 @@
                     <ul class="navbar-nav ml-auto">
                         <#if user.email??>
                         <li class="nav-item">
-                            <button type="button" style="height:60px" class="btn btn-outline-success" data-toggle="modal"
+                            <button type="button" style="height:60px" class="btn btn-outline-success"
+                                    data-toggle="modal"
                                     data-target="#addPhoto">
                                 Добавить фото
                             </button>
                         </li>
-
                         <#if url != '/profile'>
-                            <li class="nav-item">
+                            <li class="nav-item col-md-3">
                                 <button class="btn btn-outline-success" type="button" style="height:60px"
                                         onclick="window.location.href = '/profile'">
                                     Личный кабинет
@@ -63,7 +66,7 @@
                             </form>
                         </li>
                         <#else>
-                        <li class="nav-item">
+                        <li class="nav-item col-md-4">
                             <button class="btn btn-outline-success" type="button" style="height:60px"
                                     onclick="window.location.href = '/login'">
                                 Войти
@@ -82,13 +85,15 @@
         </div>
     </header>
     <div id="fix-for-navbar-fixed-top-spacing" style="height: 70px;">&nbsp;</div>
+    <div style="border:4px solid white">
+    </div>
     <div class="container">
         <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Добавить фотографию</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

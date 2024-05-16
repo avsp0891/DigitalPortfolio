@@ -25,6 +25,7 @@ public class Comment {
     private String text;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn
     private Item item;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)

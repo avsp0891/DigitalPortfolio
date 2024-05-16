@@ -3,16 +3,16 @@
     <div class="mt-5" style="height: 60px">
     </div>
 
-    <h1 style="text-align: center">Подробнее о фотографии</h1>
+    <h1 style="text-align: center">Подробнее о фотографии пользователя ${item.user.getName()}</h1>
 
-    <img src="/images/${item.id}" height="200px">
+    <img src="/images/${item.id}" height="200px" style="border:2px solid black; border-radius: 20px">
 
-    <h2>id ${item.id}</h2>
-    <h2>Наименование ${item.name}</h2>
-    <h2>Описание ${item.description}</h2>
-    <h2>Размер ${item.size}</h2>
-    <h2>Пользователь ${item.user.getEmail()}</h2>
-    <p>Количество лайков: <span id="likeCount"></span></p>
+<#--    <h2>id ${item.id}</h2>-->
+<#--    <h2>Наименование ${item.name}</h2>-->
+    <h2>Описание: ${item.description}</h2>
+<#--    <h2>Размер ${item.size}</h2>-->
+<#--    <h2>Пользователь ${item.user.getEmail()}</h2>-->
+    <h2>Количество лайков: <span id="likeCount"></span></h2>
     <script>
         const url = '/likes/${item.id}';
         const likeCountElement = document.getElementById('likeCount');
@@ -29,8 +29,8 @@
 
     <div class="mt-3 mx-auto d-block">
         <button class="btn btn-outline-success " type="button"
-                onclick="window.open('/user/${item.user.id}')">
-            Посмотреть профиль пользователя
+                onclick="window.location.href='/user/${item.user.id}'">
+            Перейти в профиль пользователя ${item.user.getName()}
         </button>
     </div>
 

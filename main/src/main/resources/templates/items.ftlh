@@ -14,24 +14,12 @@
     </script>
     <div class="mt-5" style="height: 60px">
     </div>
-    <h1 style="text-align: center">Изображения тут</h1>
+<#--    <h1 style="text-align: center">Последние изображения</h1>-->
     <#list items as item>
         <hr>
         <div>
-            <img src="/images/${item.id}" height="600px" class="mx-auto d-block">
-            <p>Количество лайков:  <span id="likeCount-${item.id}"></span></p>
-            <script>
-                const url${item.id} = '/likes/${item.id}';
-                const likeCountElement_${item.id} = document.getElementById('likeCount-${item.id}');
-                fetch(url${item.id})
-                    .then(response => response.json())
-                    .then(data => {
-                        likeCountElement_${item.id}.textContent = data.likes;
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            </script>
+            <a href="/items/${item.id}"><img src="/images/${item.id}" height="600px" class="mx-auto d-block" style="border:2px solid black; border-radius: 20px"></a>
+
         </div>
         <div>
 
@@ -42,12 +30,21 @@
         </div>
         <div class="row super">
             <div class="mt-3 mx-auto d-block">
-                <button class="btn btn-outline-success " type="button"
-                        onclick="window.location.href = '/items/${item.id}'">
-                    Подробнее
-                </button>
+                <h4>Количество лайков:  <span id="likeCount-${item.id}"></span></h4>
+                <script>
+                    const url${item.id} = '/likes/${item.id}';
+                    const likeCountElement_${item.id} = document.getElementById('likeCount-${item.id}');
+                    fetch(url${item.id})
+                        .then(response => response.json())
+                        .then(data => {
+                            likeCountElement_${item.id}.textContent = data.likes;
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                </script>
                 <#if user.getEmail()??>
-                <form action="/items/${item.id}/likes/add" method="post">
+                <form action="/items/${item.id}/likes/add" method="post" class="mt-3 mx-auto d-block">
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                         <button class="btn btn-outline-success" type="submit">
                             Поставить лайк

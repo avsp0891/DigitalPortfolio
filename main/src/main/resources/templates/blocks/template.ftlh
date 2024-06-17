@@ -6,15 +6,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <#--        <link rel="stylesheet" href="/static/css/style.css">-->
-
+        <title>Kotogram</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
               integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
               crossorigin="anonymous">
+<#--        <link rel="stylesheet" type="text/css" href="/static/css/style.css">-->
 
-        <title>Kotogram</title>
     </head>
-    <body style="background-color: #e2f6e8">
+    <body style=" background-image: url('/static/images/body.jpg')!important;
+<#--    <body style=" background-image: url('https://bogatyr.club/uploads/posts/2023-03/1679096347_bogatyr-club-p-fon-zoo-foni-vkontakte-80.jpg')!important;-->
+/*        background-size: cover; !* Покрывает весь экран, сохраняя пропорции *!*/
+            background-size: 100% auto;
+        background-repeat: repeat;
+        background-position: center;">
 
     <header>
         <div class="container">
@@ -34,15 +39,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <#if user.email??>
+<#--                        <li class="nav-item">-->
+<#--                            <button type="button" style="height:60px" class="btn btn-outline-success"-->
+<#--                                    data-toggle="modal"-->
+<#--                                    data-target="#addPhoto">-->
+<#--                                Добавить фото-->
+<#--                            </button>-->
+<#--                        </li>-->
+                         <#if url == '/profile'>
                         <li class="nav-item">
                             <button type="button" style="height:60px" class="btn btn-outline-success"
                                     data-toggle="modal"
-                                    data-target="#addPhoto">
-                                Добавить фото
+                                    data-target="#addCat">
+                                Добавить котика
                             </button>
                         </li>
+                         </#if>
                         <#if url != '/profile'>
-                            <li class="nav-item col-md-3">
+                            <li class="nav-item">
                                 <button class="btn btn-outline-success" type="button" style="height:60px"
                                         onclick="window.location.href = '/profile'">
                                     Личный кабинет
@@ -85,26 +99,42 @@
         </div>
     </header>
     <div id="fix-for-navbar-fixed-top-spacing" style="height: 70px;">&nbsp;</div>
-    <div style="border:4px solid white">
-    </div>
+<#--    <div style="border:4px solid white">-->
+<#--    </div>-->
     <div class="container">
-        <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        <div class="modal fade" id="addCat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Добавить фотографию</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Добавить котика</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/items/create" method="post" enctype="multipart/form-data">
-                            Фотография: <input type="file" name="image"><br><br>
-                            Описание: <input type="text" name="description"><br><br>
+                        <form action="/cat/create" method="post" enctype="multipart/form-data">
+                            <table>
+                                <tr>
+                                    <td>Фотография:</td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="file" name="image"><br><br></td>
+                                </tr>
+                                <tr>
+                                    <td>Кличка:</td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="text" name="name"><br><br></td>
+                                </tr>
+                                <tr>
+                                    <td>Пол: </td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="text" name="gender"><br><br></td>
+                                </tr>
+                                <tr>
+                                    <td>Порода:</td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="text" name="breed"><br><br></td>
+                                </tr>
+                            </table>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                             <input type="hidden" name="_csrf" value="${_csrf.token}">
-                            <button type="submit" class="btn btn-primary">Подтвердить</button>
+                            <button type="submit" class="btn btn-primary">Добавить</button>
                         </form>
                     </div>
                     <div class="modal-footer">

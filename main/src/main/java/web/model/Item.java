@@ -33,6 +33,10 @@ public class Item {
     @JoinColumn
     private User user;
 
+//    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne()
+    @JoinColumn
+    private Cat cat;
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn
     private List<Comment> comments;

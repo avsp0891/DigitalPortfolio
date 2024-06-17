@@ -1,23 +1,25 @@
-.product:hover {
-    transition: 0.5s;
-    transform: scale(1.02);
-}
+/*.product:hover {*/
+/*    transition: 0.5s;*/
+/*    transform: scale(1.02);*/
+/*}*/
 
-.product-link {
-    color: #1bde0c !important;
-    text-decoration: none
-}
+/*.product-link {*/
+/*    color: #1bde0c !important;*/
+/*    text-decoration: none*/
+/*}*/
 
-.super {
-    text-align: center;
-    background-size: 4px;
-    color: #11cfcf;
-    background-color: aquamarine !important;
-}
+/*.super {*/
+/*    text-align: center;*/
+/*    background-size: 4px;*/
+/*    color: #11cfcf;*/
+/*    background-color: aquamarine !important;*/
+/*}*/
 
-body {
-    background-color: #f11010; /* Цвет фона страницы */
-}
+/*.myFont {*/
+/*    font-family: 'Arial', sans-serif;*/
+/*    font-style: italic;*/
+/*    font-size: 60px;*/
+/*}*/
 
 
 

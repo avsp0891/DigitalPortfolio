@@ -25,7 +25,7 @@ public class LikesService {
         return repository.findAllByItemId(itemId);
     }
 
-    public void add(Principal principal, Item item) {
+    public int add(Principal principal, Item item) {
         User user = userService.getUserByPrincipal(principal);
         if (!likeIsExist(user.getId(), item.getId())){
             Likes likes = new Likes();
@@ -33,6 +33,7 @@ public class LikesService {
             likes.setOwnerId(user.getId());
             repository.save(likes);
         }
+        return repository.findAllByItemId(item.getId()).size();
     }
 
 

@@ -5,58 +5,42 @@
     <h1 style="text-align: center">Информация о пользователе</h1>
     <hr>
     <div style="text-align: center">
-        <img src="/static/images/avatar.png"
-             style="border:2px solid black; border-radius: 20px" height="120">
+        <img src="/static/images/avatar.png" style="border:2px solid black; border-radius: 20px" height="120">
         <br>
         <br>
         <h2>${user.name}</h2>
         <br>
         Email: <b>${user.getEmail()}</b>
     </div>
-    <br>
-    <hr>
-    <h1 style="text-align: center">Изображения пользователя ${user.name}</h1>
-    <br>
-    <table class="table table-hover">
-    <#list items as item>
-        <tr>
-<#--            <th><img src="/images/${item.id}" height="200px" class=""></th>-->
-            <th><a href="/items/${item.id}"><img src="/images/${item.id}" height="200px" class="mx-auto d-block" style="border:2px solid black; border-radius: 20px"></a></th>
-            <th><#if userByPrincipal.getId() == item.user.id>
-                    <form action="/items/delete/${item.id}" method="post">
-                        <input type="hidden" name="_csrf" value="${_csrf.token}">
-                        <button class="btn btn-outline-success" type="submit">
-                            Удалить
-                        </button>
-                    </form>
-                </#if></th>
-        </tr>
-    <#else>
-        <h3>Фотографий нет</h3>
-    </#list>
-    </table>
-<#--    <#list items as item>-->
-<#--        <hr>-->
-<#--        <div>-->
-<#--            <img src="/images/${item.id}" height="200px" class="mx-auto d-block">-->
-<#--        </div>-->
-<#--        <div class="row super">-->
-<#--            <div class="mt-3 mx-auto d-block">-->
-<#--                <button class="btn btn-outline-success " type="button"-->
-<#--                        onclick="window.open('/items/${item.id}')">-->
-<#--                    Подробнее-->
-<#--                </button>-->
-<#--            </div>-->
-<#--        </div>-->
-<#--         <#if userByPrincipal.getId() == item.user.id>-->
-<#--        <form action="/items/delete/${item.id}" method="post">-->
-<#--            <input type="hidden" name="_csrf" value="${_csrf.token}">-->
-<#--            <button class="btn btn-outline-success" type="submit">-->
-<#--                Удалить-->
-<#--            </button>-->
-<#--        </form>-->
-<#--         </#if>-->
-<#--    <#else>-->
-<#--        <h1 style="text-align: center">Не найдено</h1>-->
-<#--    </#list>-->
+    <h1 style="text-align: center">Котики пользователя ${user.name}</h1>
+    <div style="text-align: center" class="mx-auto d-block">
+        <table class="table mx-auto d-block">
+            <tr>
+                <#list user.getCats() as cat>
+                    <td class="text-center align-middle">
+                        <div class="card" style="width: 18rem; border:3px solid black; border-radius: 20px">
+                            <img class="card-img-top" src="/images/logo/${cat.logoId}"
+                                 style="border:2px solid black; border-radius: 360px">
+                            <div class="card-body">
+                                <h5 class="card-title">Имя: ${cat.name}</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Пол: ${cat.gender}</li>
+                                    <li class="list-group-item">Порода: ${cat.breed}</li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-outline-success" type="button" style="height:60px"
+                                        onclick="window.location.href = '/cat/${cat.getId()}'">
+                                    Посмотреть фото
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                <#else>
+                    <h3 style="text-align: center">У вас нет котов</h3>
+                </#list>
+            <tr>
+        </table>
+    </div>
+
 </@t.template>

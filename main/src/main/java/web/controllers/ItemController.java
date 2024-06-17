@@ -26,11 +26,9 @@ import java.util.List;
 public class ItemController {
 
     private final UserService userService;
-
     private final ItemService itemService;
     private final CommentsService commentsService;
     private final LikesService likesService;
-
     private final UserController userController;
 
 

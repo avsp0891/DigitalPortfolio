@@ -4,14 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import web.model.Comment;
-import web.model.Item;
-import web.model.Likes;
-import web.model.User;
-import web.repository.CommentRepository;
-import web.repository.ItemRepository;
-import web.repository.LikesRepository;
-import web.repository.UserRepository;
+import web.model.*;
+import web.repository.*;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -27,6 +21,7 @@ public class ItemService {
     private final UserRepository userRepository;
     private final LikesRepository likesRepository;
     private final CommentRepository commentRepository;
+    private final CatRepository catRepository;
 
 
     public List<Item> findAll() {

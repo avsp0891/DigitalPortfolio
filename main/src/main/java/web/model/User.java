@@ -1,10 +1,7 @@
 package web.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -33,11 +30,20 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "active")
     private boolean active;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Item> items = new ArrayList<>();
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Comment> comments = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Comment> comments = new ArrayList<>();
+    private Set<Cat> cats = new HashSet<>();
 
     public boolean isAdmin() {
         return roles.contains(Role.ROLE_ADMIN);

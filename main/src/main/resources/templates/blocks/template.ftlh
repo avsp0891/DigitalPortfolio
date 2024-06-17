@@ -6,20 +6,25 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <#--        <link rel="stylesheet" href="/static/css/style.css">-->
-
+        <title>Kotogram</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
               integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
               crossorigin="anonymous">
+<#--        <link rel="stylesheet" type="text/css" href="/static/css/style.css">-->
 
-        <title>Kotogram</title>
     </head>
-    <body style="background-color: #e2f6e8">
+    <body style=" background-image: url('/static/images/body.jpg')!important;
+<#--    <body style=" background-image: url('https://bogatyr.club/uploads/posts/2023-03/1679096347_bogatyr-club-p-fon-zoo-foni-vkontakte-80.jpg')!important;-->
+/*        background-size: cover; !* Покрывает весь экран, сохраняя пропорции *!*/
+            background-size: 100% auto;
+        background-repeat: repeat;
+        background-position: center;">
 
     <header>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light navbar fixed-top"
-                 style="background-color: white">
+                 style="background-color: #e3f2fd;">
                 <a class="navbar-brand" href="/">
                     <img src="/static/images/logo3.png" style="width:90px;height:90px; border:2px solid white"
                          class="rounded"
@@ -34,15 +39,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <#if user.email??>
-                        <li class="nav-item">
+                        <li class="nav-item col-md-4">
                             <button type="button" style="height:60px" class="btn btn-outline-success"
                                     data-toggle="modal"
                                     data-target="#addPhoto">
                                 Добавить фото
                             </button>
                         </li>
+                         <#if url != '/user/'>
+                             <li class="nav-item col-md-4">
+                                 <button class="btn btn-outline-success" type="button" style="height:60px"
+                                          onclick="window.location.href = '/user/${user.id}'">
+                                     Мой профиль
+                                 </button>
+                             </li>
+                         </#if>
                         <#if url != '/profile'>
-                            <li class="nav-item col-md-3">
+                            <li class="nav-item">
                                 <button class="btn btn-outline-success" type="button" style="height:60px"
                                         onclick="window.location.href = '/profile'">
                                     Личный кабинет
@@ -85,9 +98,47 @@
         </div>
     </header>
     <div id="fix-for-navbar-fixed-top-spacing" style="height: 70px;">&nbsp;</div>
-    <div style="border:4px solid white">
-    </div>
     <div class="container">
+        <div class="modal fade" id="addCat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Добавить котика</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/cat/create" method="post" enctype="multipart/form-data">
+                            <table>
+                                <tr>
+                                    <td>Фотография:</td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="file" name="image"><br><br></td>
+                                </tr>
+                                <tr>
+                                    <td>Кличка:</td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="text" name="name"><br><br></td>
+                                </tr>
+                                <tr>
+                                    <td>Пол: </td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="text" name="gender"><br><br></td>
+                                </tr>
+                                <tr>
+                                    <td>Порода:</td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;"><input type="text" name="breed"><br><br></td>
+                                </tr>
+                            </table>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -99,12 +150,36 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/items/create" method="post" enctype="multipart/form-data">
-                            Фотография: <input type="file" name="image"><br><br>
-                            Описание: <input type="text" name="description"><br><br>
+                        <form action="/cat/create" method="post" enctype="multipart/form-data">
+                            <table>
+                                <tr>
+                                    <td>Фотография: </td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;">
+                                        <input type="file" name="image" style="margin-left: 0; text-align: left;"><br><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Описание: </td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;">
+                                        <input type="text" name="description" style="margin-left: 0; text-align: left;"><br><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> <label for="myCats">Выберите кота: </label></td>
+                                    <td style="display: flex; align-items: center; justify-content: center; height: 50px;">
+                                        <select id="myCats" name="cat" style="margin-left: 0; text-align: left;">
+                                            <#list user.getCats() as cat>
+                                                <option value="${cat.id}">${cat.name}</option>
+                                            <#else>
+                                                <option value="0">У вас нет котов</option>
+                                            </#list>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                             <input type="hidden" name="_csrf" value="${_csrf.token}">
-                            <button type="submit" class="btn btn-primary">Подтвердить</button>
+                            <button type="submit" class="btn btn-primary">Добавить</button>
                         </form>
                     </div>
                     <div class="modal-footer">

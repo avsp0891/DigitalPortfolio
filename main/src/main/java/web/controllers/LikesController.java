@@ -32,8 +32,9 @@ public class LikesController {
     }
 
 //    @PostMapping("/items/{itemId}/likes/add")
-//    public void addLike(@PathVariable Integer itemId, Principal principal) {
-//        likesService.add(principal, itemService.findById(itemId));
+//    public String addLike(@PathVariable Integer itemId, Principal principal) {
+//        int newLikesCount = likesService.add(principal, itemService.findById(itemId));
+//        return "{\"likesCount\":" + newLikesCount + "}";
 //    }
 
     @AllArgsConstructor

@@ -1,46 +1,136 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user url>
-    <div class="mt-5" style="height: 60px">
+
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            opacity: 0.8;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .gallery img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+
+
+    <script>
+        function deleteImage(btn) {
+            window.btnDelete = btn;
+            var itemId = btnDelete.getAttribute('data-id');
+            $('#deleteModal').modal('show');
+            var form = $('#deleteForm');
+            form.attr('action', '/items/delete/' + itemId);
+        }
+        $('#confirmDelete').click(function () {
+            // Удаление изображения
+            window.btnDelete.parentElement.remove();
+            // Закрытие модального окна
+            $('#deleteModal').modal('hide');
+        });
+
+    </script>
+
+    <div class="nav nav-tabs fixed-top" id="cat_tab" role="tablist"
+         style="margin-top:115px; border-bottom: 0px; display: flex; justify-content: flex-end;">
+        <a class="nav-item nav-link" id="tab_cat_addCat" data-toggle="pill" role="tab" aria-controls="v-pills-profile"
+           aria-selected="false" style="background-color: transparent; border-color: transparent">
+            <div style="text-align: center;">
+                <li class="nav-item">
+                    <button type="button" class="btn" style="border-radius: 360px"
+                            data-toggle="modal"
+                            data-target="#addCat">
+                        <img src="/static/images/plus-circle.svg" height="140px" width="140px">
+                    </button>
+                </li>
+            </div>
+        </a>
+        <#list user.getCats() as cat>
+            <a class="nav-item nav-link" id="tab_cat_${cat.getId()}" data-toggle="pill"
+               href="#tab_cat_content_${cat.getId()}" role="tab" aria-controls="v-pills-profile" aria-selected="false"
+               style="background-color: transparent; border-color: transparent">
+                <div style="text-align: center;">
+                    <img src="/images/logo/${cat.logoId}" height="140px" width="140px"
+                         style="border:2px solid black; border-radius: 40px">
+                    <div style="margin-top: 10px;">${cat.getName()}</div>
+                </div>
+            </a>
+        </#list>
     </div>
-    <h1 style="text-align: center">Информация о пользователе</h1>
-    <hr>
-    <div style="text-align: center">
-        <img src="/static/images/avatar.png" style="border:2px solid black; border-radius: 20px" height="120">
-        <br>
-        <br>
-        <h2>${user.name}</h2>
-        <br>
-        Email: <b>${user.getEmail()}</b>
+    <div class="tab-content" id="v-pills-tabContent">
+        <#list user.getCats() as cat>
+            <div class="tab-pane fade" id="tab_cat_content_${cat.getId()}" role="tabpanel"
+                 aria-labelledby="v-pills-profile-tab" style="margin-top:280px;">
+                <div class="gallery">
+                    <#list items as item>
+                        <#if item.cat.getId() == cat.getId()>
+                            <div class="image-container">
+                                <a href="/items/${item.id}">
+                                    <img src="/images/${item.id}" alt="${item.getName()}" height="600px"
+                                         class="mx-auto d-block" style="border:2px solid black; border-radius: 20px">
+                                </a>
+                                <#if userByPrincipal.getId() == item.user.id>
+                                    <button class="delete-btn" onclick="deleteImage(this)" data-id=${item.id}>X</button>
+                                </#if>
+
+                            </div>
+                        </#if>
+                    </#list>
+                </div>
+            </div>
+        </#list>
     </div>
-    <h1 style="text-align: center">Котики пользователя ${user.name}</h1>
-    <div style="text-align: center" class="mx-auto d-block">
-        <table class="table mx-auto d-block">
-            <tr>
-                <#list user.getCats() as cat>
-                    <td class="text-center align-middle">
-                        <div class="card" style="width: 18rem; border:3px solid black; border-radius: 20px">
-                            <img class="card-img-top" src="/images/logo/${cat.logoId}"
-                                 style="border:2px solid black; border-radius: 360px">
-                            <div class="card-body">
-                                <h5 class="card-title">Имя: ${cat.name}</h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Пол: ${cat.gender}</li>
-                                    <li class="list-group-item">Порода: ${cat.breed}</li>
-                                </ul>
-                            </div>
-                            <div class="card-body">
-                                <button class="btn btn-outline-success" type="button" style="height:60px"
-                                        onclick="window.location.href = '/cat/${cat.getId()}'">
-                                    Посмотреть фото
-                                </button>
-                            </div>
-                        </div>
-                    </td>
-                <#else>
-                    <h3 style="text-align: center">У вас нет котов</h3>
-                </#list>
-            <tr>
-        </table>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+         aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Подтверждение
+                        удаления</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить это изображение?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Отмена
+                    </button>
+                    <form id="deleteForm" action="/items/delete/" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <button type="submit" class="btn btn-danger" id="confirmDelete">
+                            Удалить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </@t.template>

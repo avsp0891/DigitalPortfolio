@@ -36,14 +36,8 @@
 
     <div class="container">
         <div class="image">
-            <!-- Замените 'path_to_image.jpg' на путь к вашему изображению -->
-            <img src="/images/${item.id}" height="200px" style="border:2px solid black; border-radius: 40px">
-            <form action="/items/${item.id}/likes/add" method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <button class="btn btn-outline-success" type="submit">
-                    Поставить лайк
-                </button>
-            </form>
+            <img src="/images/${item.id}" height="300px" style="border:2px solid black; border-radius: 40px">
+            <a>Описание: ${item.description}</a>
         </div>
         <div class="comments">
             <div class="comment-form">

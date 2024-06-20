@@ -9,6 +9,8 @@ import web.model.User;
 import web.repository.CommentRepository;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -16,11 +18,20 @@ import java.util.List;
 @Slf4j
 public class CommentsService {
 
+    public static String formatDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        return dateTime.format(formatter);
+    }
+
     private final CommentRepository repository;
     private final UserService userService;
 
     public List<Comment> findAllByItemId(Integer itemId) {
-        return repository.findAllByItemId(itemId);
+        List<Comment> result = repository.findAllByItemId(itemId);
+        for (Comment comment: result){
+            comment.setDateOfCreatedToString(formatDateTime(comment.getDateOfCreated()));
+        }
+        return result;
     }
 
     public Comment add(Principal principal, Comment comment, Item item) {

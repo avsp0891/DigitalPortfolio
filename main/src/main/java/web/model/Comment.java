@@ -33,6 +33,8 @@ public class Comment {
     private User user;
     private LocalDateTime dateOfCreated;
 
+    private String dateOfCreatedToString;
+
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();

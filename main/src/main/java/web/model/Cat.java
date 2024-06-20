@@ -29,6 +29,8 @@ public class Cat {
     private String breed;
     @Column(name = "logo_id", length = 1000)
     private Integer logoId;
+    @Column(name = "birthday", length = 1000)
+    private String birthday;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn
     private User user;

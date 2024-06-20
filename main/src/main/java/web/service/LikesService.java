@@ -37,7 +37,7 @@ public class LikesService {
     }
 
 
-    private boolean likeIsExist(int userId, int itemId){
+    public boolean likeIsExist(int userId, int itemId){
         for (Likes l: findAllByItemId(itemId)){
             if (l.getOwnerId() == userId && l.getItemId()== itemId){
                 return true;

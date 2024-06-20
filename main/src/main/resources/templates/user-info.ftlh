@@ -44,6 +44,7 @@
             var form = $('#deleteForm');
             form.attr('action', '/items/delete/' + itemId);
         }
+
         $('#confirmDelete').click(function () {
             // Удаление изображения
             window.btnDelete.parentElement.remove();
@@ -55,26 +56,26 @@
 
     <div class="nav nav-tabs fixed-top" id="cat_tab" role="tablist"
          style="margin-top:115px; border-bottom: 0px; display: flex; justify-content: flex-end;">
-        <a class="nav-item nav-link" id="tab_cat_addCat" data-toggle="pill" role="tab" aria-controls="v-pills-profile"
-           aria-selected="false" style="background-color: transparent; border-color: transparent">
-            <div style="text-align: center;">
-                <li class="nav-item">
-                    <button type="button" class="btn" style="border-radius: 360px"
-                            data-toggle="modal"
-                            data-target="#addCat">
-                        <img src="/static/images/plus-circle.svg" height="140px" width="140px">
-                    </button>
-                </li>
-            </div>
-        </a>
+<#--        <a class="nav-item nav-link" id="tab_cat_addCat" data-toggle="pill" role="tab" aria-controls="v-pills-profile"-->
+<#--           aria-selected="false" style="background-color: transparent; border-color: transparent">-->
+<#--            <div style="text-align: center;">-->
+<#--                <li class="nav-item">-->
+<#--                    <button type="button" class="btn" style="border-radius: 360px"-->
+<#--                            data-toggle="modal"-->
+<#--                            data-target="#addCat">-->
+<#--                        <img src="/static/images/plus-circle.svg" height="140px" width="140px">-->
+<#--                    </button>-->
+<#--                </li>-->
+<#--            </div>-->
+<#--        </a>-->
         <#list user.getCats() as cat>
             <a class="nav-item nav-link" id="tab_cat_${cat.getId()}" data-toggle="pill"
                href="#tab_cat_content_${cat.getId()}" role="tab" aria-controls="v-pills-profile" aria-selected="false"
                style="background-color: transparent; border-color: transparent">
                 <div style="text-align: center;">
                     <img src="/images/logo/${cat.logoId}" height="140px" width="140px"
-                         style="border:2px solid black; border-radius: 40px">
-                    <div style="margin-top: 10px;">${cat.getName()}</div>
+                         style="border:2px solid black; border-radius: 40px; object-fit: cover;">
+                    <div style="margin-top: 10px; font-size: 25px;">${cat.getName()}</div>
                 </div>
             </a>
         </#list>
@@ -83,6 +84,24 @@
         <#list user.getCats() as cat>
             <div class="tab-pane fade" id="tab_cat_content_${cat.getId()}" role="tabpanel"
                  aria-labelledby="v-pills-profile-tab" style="margin-top:280px;">
+                <table class="table" style="margin-top: 250px; background-color: #717bbd52;">
+                    <thead>
+                    <tr>
+                        <th>Кличка</th>
+                        <th>Пол</th>
+                        <th>Дата рождения</th>
+                        <th>Порода</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>${cat.getName()}</td>
+                        <td>${cat.getGender()}</td>
+                        <td>${cat.getBirthday()}</td>
+                        <td>${cat.getBreed()}</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <div class="gallery">
                     <#list items as item>
                         <#if item.cat.getId() == cat.getId()>
@@ -94,7 +113,6 @@
                                 <#if userByPrincipal.getId() == item.user.id>
                                     <button class="delete-btn" onclick="deleteImage(this)" data-id=${item.id}>X</button>
                                 </#if>
-
                             </div>
                         </#if>
                     </#list>

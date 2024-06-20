@@ -2,7 +2,7 @@
 <@t.template user url>
     <div class="mt-5" style="height: 60px">
     </div>
-    <h1 style="text-align: center">Авторизация</h1>
+    <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-style: oblique">Авторизация</h1>
     <form action="/login" method="post">
         <div class="form-group">
             <label style="font-size: 25px; font-family: 'Arial', sans-serif; font-style: oblique" for="email">Электронная почта</label>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <button class="btn btn btn-success btn-lg btn-block" type="submit" style="font-size: 25px; font-family: 'Arial', sans-serif; font-style: oblique">
+        <button class="btn btn btn-success btn-lg btn-block" type="submit" style="font-size: 25px; font-family: 'Arial', sans-serif; font-style: oblique;">
             Войти
         </button>
     </form>

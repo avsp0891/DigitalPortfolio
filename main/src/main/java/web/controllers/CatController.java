@@ -27,8 +27,10 @@ public class CatController {
     private final ItemService itemService;
     private final UserService userService;
 
+    private final UserController userController;
+
     @PostMapping("/cat/create")
-    public String add(@RequestParam("image") MultipartFile image, Principal principal, Cat cat) {
+    public String add(@RequestParam("image") MultipartFile image, Principal principal, Cat cat, Model model) {
         Logo logo;
         if (!image.isEmpty()){
             logo = logoService.add(image);
@@ -37,7 +39,8 @@ public class CatController {
             cat.setLogoId(0);
         }
         catService.add(principal, cat);
-        return "redirect:/";
+
+        return "redirect:/user/"+ userService.getUserByPrincipal(principal).getId();
     }
 
     @GetMapping("/cat/{id}")

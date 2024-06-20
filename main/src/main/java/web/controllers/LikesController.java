@@ -31,11 +31,10 @@ public class LikesController {
         return new Like(likes.size());
     }
 
-//    @PostMapping("/items/{itemId}/likes/add")
-//    public String addLike(@PathVariable Integer itemId, Principal principal) {
-//        int newLikesCount = likesService.add(principal, itemService.findById(itemId));
-//        return "{\"likesCount\":" + newLikesCount + "}";
-//    }
+    @GetMapping("/items/{itemId}/likes/{userId}")
+    public boolean addLike(@PathVariable Integer itemId, @PathVariable Integer userId) {
+       return likesService.likeIsExist(userId, itemId);
+    }
 
     @AllArgsConstructor
     @Data
